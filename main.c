@@ -19,7 +19,7 @@ int man() {
         double amount;
 
         // Card selection
-        printf("\nSelect a card (e.g., 1 for Card 1, 2 for Card 2): ");
+        printf("\nSelect a card (e.g., 1 for Card 1, 2 for Card 2):\n>>> ");
         scanf("%d", &selectedCard);
         account = findAccount(accounts, accountCount, selectedCard);
         if (account == NULL) {
@@ -60,7 +60,7 @@ int man() {
             printf("4. Deposit\n");
             printf("5. Eject Card (return to card selection)\n");
             printf("6. Quit\n");
-            printf("Select an option: ");
+            printf("Select an option:\n>>> ");
             scanf("%d", &choice);
 
             double originalBalance = account->balance;
@@ -68,9 +68,9 @@ int man() {
             switch (choice) {
                 case 1: {
                     int newPin1, newPin2;
-                    printf("Enter new PIN: ");
+                    printf("Enter new PIN:\n>>> ");
                     scanf("%d", &newPin1);
-                    printf("Re-enter new PIN: ");
+                    printf("Re-enter new PIN:\n>>> ");
                     scanf("%d", &newPin2);
                     result = changePin(account, newPin1, newPin2);
                     printf("%s\n", result);
@@ -84,7 +84,7 @@ int man() {
                     break;
                 }
                 case 3: {
-                    printf("Enter amount to withdraw: ");
+                    printf("Enter amount to withdraw:\n>>> ");
                     scanf("%lf", &amount);
                     result = withdraw(account, amount);
                     printf("%s\n", result);
@@ -95,9 +95,9 @@ int man() {
                     break;
                 }
                 case 4: {
-                    printf("Enter amount to deposit: ");
+                    printf("Enter amount to deposit:\n>>> ");
                     scanf("%lf", &amount);
-                    result = dep(account, amount);
+                    result = deposit(account, amount);
                     printf("%s\n", result);
                     if (strstr(result, "successful") != NULL) {
                         logTransaction(account->accountNumber, "Deposit", originalBalance, account->balance);

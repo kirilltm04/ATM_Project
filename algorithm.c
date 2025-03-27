@@ -40,7 +40,7 @@ const char* withdraw(struct BankAccount *account, double amount) {
     return "Insufficient funds!";
 }
 
-const char* dep(struct BankAccount *account, double amount) {
+const char* deposit(struct BankAccount *account, double amount) {
     if (amount <= 0) {
         return "Invalid deposit amount!";
     }

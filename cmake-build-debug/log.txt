@@ -24,3 +24,5 @@ Account 2 - Card Retained: Original Balance = £0.00, New Balance = £0.00
 Account 1 - Change PIN: Original Balance = £1134.60, New Balance = £1134.60
 Account 1 - Card Retained: Original Balance = £0.00, New Balance = £0.00
 Account 2 - Card Retained: Original Balance = £0.00, New Balance = £0.00
+Account 1 - Card Retained: Original Balance = £0.00, New Balance = £0.00
+Account 2 - Deposit: Original Balance = £848.50, New Balance = £1348.50

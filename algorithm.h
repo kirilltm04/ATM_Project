@@ -15,7 +15,7 @@ struct BankAccount {
 // Function prototypes
 struct BankAccount* loadAccountsFromCSV(const char *filename, int *accountCount);
 const char* withdraw(struct BankAccount *account, double amount);
-const char* dep(struct BankAccount *account, double amount);
+const char* deposit(struct BankAccount *account, double amount);
 bool checkPin(struct BankAccount *account, int enteredPin);  // PIN verification
 bool checkBlocked(struct BankAccount *account);
 const char* changePin(struct BankAccount *account, int newPin1, int newPin2);
