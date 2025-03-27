@@ -70,8 +70,8 @@ build CMakeFiles/Programming_Assignment.dir/databases.c.o: C_COMPILER__Programmi
   OBJECT_DIR = CMakeFiles/Programming_Assignment.dir
   OBJECT_FILE_DIR = CMakeFiles/Programming_Assignment.dir
 
-build CMakeFiles/Programming_Assignment.dir/gui.c.o: C_COMPILER__Programming_Assignment_Debug /Users/kirilltm04/Work/Progs/C$:C++/Kaplan/Programming_Assignment/gui.c || cmake_object_order_depends_target_Programming_Assignment
-  DEP_FILE = CMakeFiles/Programming_Assignment.dir/gui.c.o.d
+build CMakeFiles/Programming_Assignment.dir/unittest.c.o: C_COMPILER__Programming_Assignment_Debug /Users/kirilltm04/Work/Progs/C$:C++/Kaplan/Programming_Assignment/unittest.c || cmake_object_order_depends_target_Programming_Assignment
+  DEP_FILE = CMakeFiles/Programming_Assignment.dir/unittest.c.o.d
   FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk
   INCLUDES = -I/opt/local/include/gtk-4.0 -I/opt/local/include/pango-1.0 -I/opt/local/include/harfbuzz -I/opt/local/include/fribidi -I/opt/local/include -I/opt/local/include/gdk-pixbuf-2.0 -I/opt/local/include/cairo -I/opt/local/include/pixman-1 -I/opt/local/include/freetype2 -I/opt/local/include/libpng16 -I/opt/local/include/graphene-1.0 -I/opt/local/lib/graphene-1.0/include -I/opt/local/include/glib-2.0 -I/opt/local/lib/glib-2.0/include
   OBJECT_DIR = CMakeFiles/Programming_Assignment.dir
@@ -85,7 +85,7 @@ build CMakeFiles/Programming_Assignment.dir/gui.c.o: C_COMPILER__Programming_Ass
 #############################################
 # Link the executable Programming_Assignment
 
-build Programming_Assignment: C_EXECUTABLE_LINKER__Programming_Assignment_Debug CMakeFiles/Programming_Assignment.dir/main.c.o CMakeFiles/Programming_Assignment.dir/algorithm.c.o CMakeFiles/Programming_Assignment.dir/databases.c.o CMakeFiles/Programming_Assignment.dir/gui.c.o
+build Programming_Assignment: C_EXECUTABLE_LINKER__Programming_Assignment_Debug CMakeFiles/Programming_Assignment.dir/main.c.o CMakeFiles/Programming_Assignment.dir/algorithm.c.o CMakeFiles/Programming_Assignment.dir/databases.c.o CMakeFiles/Programming_Assignment.dir/unittest.c.o
   FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk
   LINK_LIBRARIES = -Wl,-rpath,/opt/local/lib  -lgtk-4  -lpangocairo-1.0  -lpango-1.0  -lharfbuzz  -lgdk_pixbuf-2.0  -lcairo-gobject  -lcairo  -lgraphene-1.0  -lgio-2.0  -lgobject-2.0  -lglib-2.0  -lintl  -lsqlite3
   LINK_PATH = -L/opt/local/lib

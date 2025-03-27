@@ -16,7 +16,10 @@ struct BankAccount {
 };
 
 bool checkPin(struct BankAccount *account, int enteredPin) {
-    return (enteredPin == account->pinCode);
+    if (enteredPin == account->pinCode) {
+        return true;
+    }
+    return false;
 }
 
 bool checkBlocked(struct BankAccount *account) {
@@ -28,8 +31,8 @@ const char* withdraw(struct BankAccount *account, double amount) {
         return "Invalid withdrawal amount!";
     }
     // Ensure the withdrawal amount is a multiple of 5.
-    if ((int)amount % 5 != 0) {
-        return "Amount must be a multiple of 5!";
+    if ((int)amount % 5 != 0 && (int)amount % 10 != 0 || (int)amount % 20 != 0) {
+        return "Amount must be a multiple of 5, 10 or 20!";
     }
     if (account->balance >= amount) {
         account->balance -= amount;
@@ -98,7 +101,7 @@ void displayReceipt(const char *accountHolder, const char *transactionType, doub
 // It returns a pointer to that array and sets *accountCount to the number of accounts read.
 struct BankAccount* loadAccountsFromCSV(const char *filename, int *accountCount) {
     int numberOfAccounts = 2;
-    struct BankAccount *accountList = malloc(100);
+    struct BankAccount *accountList = malloc(numberOfAccounts * sizeof(struct BankAccount));
     FILE *file = fopen(filename, "r");
     if (!file) {
         printf("Error: Could not open %s\n", filename);

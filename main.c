@@ -3,7 +3,7 @@
 #include <string.h>
 #include "algorithm.h"
 
-int man() {
+int min() {
     int accountCount;
     // Load accounts once at the beginning
     struct BankAccount *accounts = loadAccountsFromCSV("accounts.csv", &accountCount);
@@ -34,7 +34,7 @@ int man() {
         pinAttempts = 0;
         bool pinVerified = false;
         while (pinAttempts < 3 && !pinVerified) {
-            printf("Enter PIN: ");
+            printf("Enter PIN (exactly 4 digits):\n>>> ");
             scanf("%d", &pin);
             if (checkPin(account, pin)) {
                 pinVerified = true;
