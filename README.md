@@ -1,7 +1,4 @@
-Below is an example of a concise README file for your GitHub project:
-
 ---
-
 # ATM Simulator
 
 A C-based ATM simulator featuring both a command-line and a GTK-based graphical user interface (GUI). This project implements core ATM functionalities such as card selection, PIN verification, balance inquiry, deposit, withdrawal, and PIN change, along with transaction logging and receipt generation.
@@ -55,3 +52,5 @@ This project is licensed under the GNU License.
 ## Author
 
 Kirill Tumoian
+
+---
