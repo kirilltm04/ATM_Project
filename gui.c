@@ -11,8 +11,7 @@
 typedef struct {
     GtkWidget *main_window;      // Pointer to the main application window
     GtkWidget *stack;            // Stack to switch between screens
-
-    // Screens
+    // Init screens
     GtkWidget *card_selection_screen;
     GtkWidget *pin_screen;
     GtkWidget *main_menu_screen;
