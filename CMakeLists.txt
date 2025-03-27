@@ -10,7 +10,7 @@ find_package(PkgConfig REQUIRED)
 pkg_check_modules(SQLITE3 REQUIRED sqlite3)
 
 # Add executable with additional source files
-add_executable(Programming_Assignment main.c algorithm.c databases.c unittest.c)
+add_executable(Programming_Assignment algorithm.c main.c)
 
 # Link GTK4
 target_include_directories(Programming_Assignment PRIVATE ${GTK4_INCLUDE_DIRS})

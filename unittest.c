@@ -35,14 +35,14 @@ void test_withdraw() {
 
     // Attempting to withdraw more than the balance.
     result = withdraw(&account, 105);
-    //assert(strcmp(result, "Insufficient funds!") == 0);
+    assert(strcmp(result, "Insufficient funds!") == 0);
 
     // Valid withdrawal.
     result = withdraw(&account, 50);
     // Check that the message indicates success.
-    //assert(strstr(result, "Withdrawal successful!") != NULL);
+    assert(strstr(result, "Withdrawal successful!") != NULL);
     // Verify that the account balance has been updated.
-    //assert(account.balance == 50.0);
+    assert(account.balance == 50.0);
 }
 
 // Test deposit function
@@ -95,7 +95,6 @@ void test_findAccount() {
     struct BankAccount* acc = findAccount(accounts, 2, 1);
     assert(acc != NULL);
     assert(acc->accountNumber == 1);
-
     acc = findAccount(accounts, 2, 3);
     assert(acc == NULL);
 }

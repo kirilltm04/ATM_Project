@@ -3,7 +3,7 @@
 #include <string.h>
 #include "algorithm.h"
 
-int min() {
+int main() {
     int accountCount;
     // Load accounts once at the beginning
     struct BankAccount *accounts = loadAccountsFromCSV("accounts.csv", &accountCount);
