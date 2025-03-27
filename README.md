@@ -44,42 +44,13 @@ A C-based ATM simulator featuring both a command-line and a GTK-based graphical 
   - GTK 4 development libraries (for the GUI)
   - Standard C library
 
-## Compilation & Execution
-
-### Command-Line Version
-Compile with:
-```bash
-gcc -o atm main.c algorithm.c -std=c11
-```
-Run with:
-```bash
-./atm
-```
-
-### GUI Version
-Compile with:
-```bash
-gcc -o atm_gui gui.c algorithm.c `pkg-config --cflags --libs gtk4` -std=c11
-```
-Run with:
-```bash
-./atm_gui
-```
-
-### Running Unit Tests
-Compile and run the tests:
-```bash
-gcc -o test test.c algorithm.c -std=c11
-./test
-```
-
 ## Testing
 
 Both unit and integration testing are integrated to ensure the functionality of all core features. Run the unit tests provided in `test.c` to verify that each ATM function behaves as expected.
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the GNU License.
 
 ## Author
 
