@@ -47,7 +47,7 @@ Both unit and integration testing are integrated to ensure the functionality of 
 
 ## License
 
-This project is licensed under the GNU License.
+This project is licensed under the GNU GENERAL PUBLIC LICENSE License.
 
 ## Author
 
