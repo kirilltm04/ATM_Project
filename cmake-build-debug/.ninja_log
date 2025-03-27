@@ -1,0 +1,13 @@
+# ninja log v5
+0	336	1743034377760012595	build.ninja	d72e73c8e3a3ae02
+1	96	1743031097433825810	CMakeFiles/Programming_Assignment.dir/algorithm.c.o	c2b37f7d2ccd4a74
+1	101	1743015439094189380	CMakeFiles/Programming_Assignment.dir/databases.c.o	1a67595bdae9b18a
+93	185	1743031600950872744	Programming_Assignment	1d9aca7bf1d56fa1
+1	93	1743031600857097420	CMakeFiles/Programming_Assignment.dir/main.c.o	f6b3c43d1495d813
+7	916	1743031494127643145	CMakeFiles/Programming_Assignment.dir/gui.c.o	6354e5bf71cf8b89
+2	81	1743034394534679545	CMakeFiles/Programming_Assignment.dir/main.c.o	f6b3c43d1495d813
+2	82	1743034394536513805	CMakeFiles/Programming_Assignment.dir/algorithm.c.o	c2b37f7d2ccd4a74
+1	645	1743034556316618131	CMakeFiles/Programming_Assignment.dir/gui.c.o	6354e5bf71cf8b89
+648	726	1743034556401328108	Programming_Assignment	1faa606488c0bf84
+10	773	1743034844724748948	CMakeFiles/Programming_Assignment.dir/gui.c.o	6354e5bf71cf8b89
+773	843	1743034844798562750	Programming_Assignment	1faa606488c0bf84

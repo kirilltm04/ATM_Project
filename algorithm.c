@@ -1,0 +1,162 @@
+//
+// Created by Kirill Tumoian on 25.03.2025.
+//
+#include <stdio.h>
+#include <stdbool.h>
+#include <string.h>
+#include <stdlib.h>
+
+
+struct BankAccount {
+    int accountNumber;
+    char accountHolder[50];
+    double balance;
+    int pinCode;
+    bool blocked;
+};
+
+bool checkPin(struct BankAccount *account, int enteredPin) {
+    return (enteredPin == account->pinCode);
+}
+
+bool checkBlocked(struct BankAccount *account) {
+    return account->blocked;
+}
+
+const char* withdraw(struct BankAccount *account, double amount) {
+    if (amount <= 0) {
+        return "Invalid withdrawal amount!";
+    }
+    // Ensure the withdrawal amount is a multiple of 5.
+    if ((int)amount % 5 != 0) {
+        return "Amount must be a multiple of 5!";
+    }
+    if (account->balance >= amount) {
+        account->balance -= amount;
+        static char msg[100];
+        snprintf(msg, 100, "Withdrawal successful! New balance: £%.2f", account->balance);
+        return msg;
+    }
+    return "Insufficient funds!";
+}
+
+const char* dep(struct BankAccount *account, double amount) {
+    if (amount <= 0) {
+        return "Invalid deposit amount!";
+    }
+    account->balance += amount;
+    static char msg[100];
+    snprintf(msg, sizeof(msg), "Deposit successful! New balance: £%.2f", account->balance);
+    return msg;
+}
+
+const char* changePin(struct BankAccount *account, int newPin1, int newPin2) {
+    if (newPin1 != newPin2) {
+        return "Error: PINs do not match!";
+    }
+    if (newPin1 < 1000 || newPin1 > 9999) { // Ensure exactly 4 digits
+        return "Error: PIN must be exactly 4 digits!";
+    }
+    account->pinCode = newPin1;
+    return "PIN successfully changed!";
+}
+
+const char* showBalance(struct BankAccount *account) {
+    static char msg[100];
+    snprintf(msg, sizeof(msg), "Your current balance is: £%.2f", account->balance);
+    return msg;
+}
+
+// Logging function that appends the transaction details to "log.txt"
+void logTransaction(int accountNumber, const char *transactionType, double originalBalance, double newBalance) {
+    FILE *logFile = fopen("log.txt", "a");
+    if (logFile != NULL) {
+        fprintf(logFile, "Account %d - %s: Original Balance = £%.2f, New Balance = £%.2f\n",
+                accountNumber, transactionType, originalBalance, newBalance);
+        fclose(logFile);
+    } else {
+        printf("Error: Could not open log file.\n");
+    }
+}
+
+// Function to optionally display a receipt on the screen
+void displayReceipt(const char *accountHolder, const char *transactionType, double originalBalance, double newBalance) {
+    char choice;
+    printf("Do you want a receipt? (y/n): ");
+    scanf(" %c", &choice);
+    if(choice == 'y' || choice == 'Y') {
+        printf("\n---- Transaction Receipt ----\n");
+        printf("Transaction: %s\n", transactionType);
+        printf("Original Balance: £%.2f\n", originalBalance);
+        printf("New Balance: £%.2f\n", newBalance);
+        printf("Thank you, %s\n", accountHolder);
+        printf("------------------------------\n");
+    }
+}
+
+// This function reads the CSV file and fills a static array of BankAccount.
+// It returns a pointer to that array and sets *accountCount to the number of accounts read.
+struct BankAccount* loadAccountsFromCSV(const char *filename, int *accountCount) {
+    int numberOfAccounts = 2;
+    struct BankAccount *accountList = malloc(100);
+    FILE *file = fopen(filename, "r");
+    if (!file) {
+        printf("Error: Could not open %s\n", filename);
+        *accountCount = 0;
+        return accountList;
+    }
+    char line[256];
+    // Skip the header line.
+    if (fgets(line, sizeof(line), file) == NULL) {
+        fclose(file);
+        *accountCount = 0;
+        return accountList;
+    }
+    *accountCount = 0;
+    while (fgets(line, sizeof(line), file) != NULL && *accountCount < numberOfAccounts) {
+        int accNum, pin, blockedInt;
+        double balance;
+        char name[50];
+        // Parse the CSV line.
+        if (sscanf(line, "%d,%49[^,],%lf,%d,%d", &accNum, name, &balance, &pin, &blockedInt) == 5) {
+            accountList[*accountCount].accountNumber = accNum;
+            strcpy(accountList[*accountCount].accountHolder, name);
+            accountList[*accountCount].balance = balance;
+            accountList[*accountCount].pinCode = pin;
+            accountList[*accountCount].blocked = (blockedInt != 0);
+            (*accountCount)++;
+        }
+    }
+    fclose(file);
+    return accountList;
+}
+
+
+struct BankAccount* findAccount(struct BankAccount *accounts, int counter, int accountNumber) {
+    for (int i = 0; i < counter; i++) {
+        if (accounts[i].accountNumber == accountNumber) {
+            return &accounts[i];
+        }
+    }
+    return NULL;
+}
+
+void saveAccountsToCSV(const char *filename, struct BankAccount *accounts, int accountCount) {
+    FILE *file = fopen(filename, "w");
+    if (!file) {
+        printf("Error: Could not open %s for writing.\n", filename);
+        return;
+    }
+    // Write the CSV header
+    fprintf(file, "accountNumber,accountHolder,balance,pinCode,blocked\n");
+    // Write each account's details
+    for (int i = 0; i < accountCount; i++) {
+        fprintf(file, "%d,%s,%.2f,%d,%d\n",
+                accounts[i].accountNumber,
+                accounts[i].accountHolder,
+                accounts[i].balance,
+                accounts[i].pinCode,
+                accounts[i].blocked ? 1 : 0);
+    }
+    fclose(file);
+}

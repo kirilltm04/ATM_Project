@@ -1,0 +1,26 @@
+Change PIN: Original Balance = £1234.60, New Balance = £1234.60
+Change PIN: Original Balance = £1234.60, New Balance = £1234.60
+Check Balance: Original Balance = £848.50, New Balance = £848.50
+Withdrawal: Original Balance = £848.50, New Balance = £828.50
+Check Balance: Original Balance = £828.50, New Balance = £828.50
+Check Balance: Original Balance = £848.50, New Balance = £848.50
+Account 1 - Deposit: Original Balance = £1234.60, New Balance = £1357.60
+Account 1 - Withdrawal: Original Balance = £1234.60, New Balance = £234.60
+Account 1 - Withdrawal: Original Balance = £1234.60, New Balance = £1114.60
+Account 1 - Withdrawal: Original Balance = £1234.60, New Balance = £1224.60
+Account 1 - Withdrawal: Original Balance = £1234.60, New Balance = £1224.60
+Account 2 - Withdrawal: Original Balance = £848.50, New Balance = £748.50
+Account 1 - Card Retained: Original Balance = £1234.60, New Balance = £1234.60
+Account 1 - Card Retained: Original Balance = £0.00, New Balance = £0.00
+Account 2 - Card Retained: Original Balance = £0.00, New Balance = £0.00
+Account 1 - Withdrawal: Original Balance = £1234.60, New Balance = £1214.60
+Account 1 - Check Balance: Original Balance = £1214.60, New Balance = £1214.60
+Account 1 - Check Balance: Original Balance = £1234.60, New Balance = £1234.60
+Account 2 - Deposit: Original Balance = £848.50, New Balance = £871.50
+Account 1 - Card Retained: Original Balance = £0.00, New Balance = £0.00
+Account 1 - Change PIN: Original Balance = £1234.60, New Balance = £1234.60
+Account 1 - Withdrawal: Original Balance = £1234.60, New Balance = £1134.60
+Account 2 - Card Retained: Original Balance = £0.00, New Balance = £0.00
+Account 1 - Change PIN: Original Balance = £1134.60, New Balance = £1134.60
+Account 1 - Card Retained: Original Balance = £0.00, New Balance = £0.00
+Account 2 - Card Retained: Original Balance = £0.00, New Balance = £0.00
