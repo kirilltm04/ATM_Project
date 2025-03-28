@@ -47,3 +47,8 @@ Account 1 - Check Balance: Original Balance = £1234.60, New Balance = £1234.60
 Account 1 - Withdrawal: Original Balance = £1234.60, New Balance = £1134.60
 Account 1 - Deposit: Original Balance = £1134.60, New Balance = £1175.10
 Account 1 - Deposit: Original Balance = £1175.10, New Balance = £1234.60
+Account 1 - Withdrawal: Original Balance = £1234.60, New Balance = £1194.60
+Account 1 - Deposit: Original Balance = £1194.60, New Balance = £1234.60
+Account 1 - Deposit: Original Balance = £1234.60, New Balance = £1274.60
+Account 1 - Withdrawal: Original Balance = £1274.60, New Balance = £1234.60
+Account 1 - Check Balance: Original Balance = £1234.60, New Balance = £1234.60

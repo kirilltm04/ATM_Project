@@ -5,7 +5,8 @@
 #include <stdbool.h>
 #include <string.h>
 #include <stdlib.h>
-#include <assert.h>
+#include <assert.h> // For unit tests
+#include <time.h>  // For date/time
 
 // Function prototypes
 struct BankAccount* loadAccountsFromCSV(const char *filename, int *accountCount);
@@ -204,15 +205,37 @@ void logTransaction(int accountNumber, const char *transactionType, double origi
 // Function to optionally display a receipt on the screen
 void displayReceipt(const char *accountHolder, const char *transactionType, double originalBalance, double newBalance) {
     char choice;
-    printf("Do you want a receipt? (y/n): ");
-    scanf(" %c", &choice);
-    if(choice == 'y' || choice == 'Y') {
-        printf("\n---- Transaction Receipt ----\n");
-        printf("Transaction: %s\n", transactionType);
-        printf("Original Balance: £%.2f\n", originalBalance);
-        printf("New Balance: £%.2f\n", newBalance);
-        printf("Thank you, %s\n", accountHolder);
-        printf("------------------------------\n");
+    // Get the current date/time
+    time_t t = time(NULL);
+    struct tm *tm_info = localtime(&t);
+    char dateTime[26];
+    strftime(dateTime, 26, "%Y-%m-%d %H:%M:%S", tm_info);  // Format as: YYYY-MM-DD HH:MM:SS
+    // Ask if user wants the receipt
+    while (1) {
+        printf("Do you want a receipt? (y/n):\n>>> ");
+        scanf(" %c", &choice);  // Read a single character, ignore leading whitespace
+        // Validate the input
+        if (choice == 'y' || choice == 'Y' || choice == 'n' || choice == 'N') {
+            break;  // Exit loop if valid input
+        } else {
+            // Clear invalid input
+            while (getchar() != '\n');  // Clear the buffer of any extra characters
+            printf("Invalid input! Please enter 'y' for yes or 'n' for no.\n");
+        }
+    }
+    // Proceed if the input is valid
+    if (choice == 'y' || choice == 'Y') {
+        // Print the receipt
+        printf("\n----- ATM RECEIPT -----\n");
+        printf("Date/Time: %s\n", dateTime);
+        printf("Account Holder: %s\n", accountHolder);
+        printf("----------------------\n");
+        printf("Transaction: %-12s\n", transactionType);
+        printf("Original Balance: £%10.2f\n", originalBalance);
+        printf("New Balance:      £%10.2f\n", newBalance);
+        printf("----------------------\n");
+        printf("Thank you for using our ATM!\n");
+        printf("----------------------\n");
     }
 }
 
