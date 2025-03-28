@@ -112,6 +112,7 @@ void test_findAccount() {
     };
 
     struct BankAccount* acc = findAccount(accounts, 2, 1);
+
     assert(acc != NULL);
     assert(acc->accountNumber == 1);
     acc = findAccount(accounts, 2, 3);
