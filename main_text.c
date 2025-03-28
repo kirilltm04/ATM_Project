@@ -15,7 +15,6 @@ int main() {
     while (true) {
         struct BankAccount *account = NULL;
         int pinAttempts;
-        double amount;
         // Card selection
         printf("\nWelcome to the ATM Machine created by Kirill!\n"
                "Select a card (e.g., 1 for Card 1, 2 for Card 2). Enter 0 to Quit the Program:\n>>> ");
@@ -89,7 +88,7 @@ int main() {
                 }
                 case 3: {
                     printf("Enter amount to withdraw:\n>>> ");
-                    scanf("%lf", &amount);
+                    double amount = getValidDouble();
                     result = withdraw(account, amount);
                     printf("%s\n", result);
                     if (strstr(result, "successful") != NULL) {
@@ -100,7 +99,7 @@ int main() {
                 }
                 case 4: {
                     printf("Enter amount to deposit:\n>>> ");
-                    scanf("%lf", &amount);
+                    double amount = getValidDouble();
                     result = deposit(account, amount);
                     printf("%s\n", result);
                     if (strstr(result, "successful") != NULL) {
