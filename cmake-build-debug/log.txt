@@ -43,3 +43,7 @@ Account 1 - Change PIN: Original Balance = £0.00, New Balance = £0.00
 Account 1 - Change PIN: Original Balance = £0.00, New Balance = £0.00
 Account 1 - Deposit: Original Balance = £1234.60, New Balance = £11274.60
 Account 1 - Withdrawal: Original Balance = £11274.60, New Balance = £1234.60
+Account 1 - Check Balance: Original Balance = £1234.60, New Balance = £1234.60
+Account 1 - Withdrawal: Original Balance = £1234.60, New Balance = £1134.60
+Account 1 - Deposit: Original Balance = £1134.60, New Balance = £1175.10
+Account 1 - Deposit: Original Balance = £1175.10, New Balance = £1234.60

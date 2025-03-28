@@ -64,7 +64,7 @@ const char* withdraw(struct BankAccount *account, double amount) {
         return "Invalid withdrawal amount!";
     }
     // Ensure the withdrawal amount is a multiple of 5.
-    if ((int)amount % 5 != 0) {
+    if ((int)amount % 10 != 0) {
         return "Amount must be a multiple of 5, 10 or 20!";
     }
     if (account->balance >= amount) {
@@ -88,8 +88,11 @@ void test_withdraw() {
     result = withdraw(&account, 7);
     assert(strcmp(result, "Amount must be a multiple of 5, 10 or 20!") == 0);
 
+    result = withdraw(&account, 45);
+    assert(strcmp(result, "Amount must be a multiple of 5, 10 or 20!") == 0);
+
     // Attempting to withdraw more than the balance.
-    result = withdraw(&account, 105);
+    result = withdraw(&account, 110);
     assert(strcmp(result, "Insufficient funds!") == 0);
 
     // Valid withdrawal.
@@ -317,6 +320,16 @@ double getValidDouble() {
 
 
 int main() {
+    // Running the unit test functions
+    test_checkPin();
+    test_checkBlocked();
+    test_withdraw();
+    test_deposit();
+    test_changePin();
+    test_showBalance();
+    test_findAccount();
+    printf("\nAll unit tests passed successfully! Let's head to the ATM Machine itself;)\n\n");
+
     int accountCount;
     // Load accounts once at the beginning
     struct BankAccount *accounts = loadAccountsFromCSV("accounts.csv", &accountCount);
@@ -332,7 +345,7 @@ int main() {
                "Select a card (e.g., 1 for Card 1, 2 for Card 2). Enter 0 to Quit the Program:\n>>> ");
         int selectedCard = getValidInt();
         if (selectedCard == 0) {
-            printf("Exiting program. Thanks for using the ATM!.\n");
+            printf("Exiting program. Thanks for using the ATM!\n");
             // Save updated accounts before exiting.
             saveAccountsToCSV("accounts.csv", accounts, accountCount);
             exit(0);

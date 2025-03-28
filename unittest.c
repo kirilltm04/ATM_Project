@@ -33,8 +33,11 @@ void test_withdraw() {
     result = withdraw(&account, 7);
     assert(strcmp(result, "Amount must be a multiple of 5, 10 or 20!") == 0);
 
+    result = withdraw(&account, 45);
+    assert(strcmp(result, "Amount must be a multiple of 5, 10 or 20!") == 0);
+
     // Attempting to withdraw more than the balance.
-    result = withdraw(&account, 105);
+    result = withdraw(&account, 110);
     assert(strcmp(result, "Insufficient funds!") == 0);
 
     // Valid withdrawal.
