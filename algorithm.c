@@ -151,7 +151,7 @@ void saveAccountsToCSV(const char *filename, struct BankAccount *accounts, int a
         return;
     }
     // Write the CSV header
-    fprintf(file, "accountNumber,accountHolder,balance,pinCode,blocked\n");
+    fprintf(file, "AccountNumber,AccountHolder,Balance,PinCode,Blocked\n");
     // Write each account's details
     for (int i = 0; i < accountCount; i++) {
         fprintf(file, "%d,%s,%.2f,%d,%d\n",
@@ -162,4 +162,26 @@ void saveAccountsToCSV(const char *filename, struct BankAccount *accounts, int a
                 accounts[i].blocked ? 1 : 0);
     }
     fclose(file);
+}
+
+// Helper function to safely read an integer
+int getValidInt() {
+    int num;
+    char ch;
+    while (scanf("%d", &num) != 1) {
+        while ((ch = getchar()) != '\n' && ch != EOF);  // Clear buffer
+        printf("Invalid input. Please try again:\n>>> ");
+    }
+    return num;
+}
+
+// Helper function to safely read a double
+double getValidDouble() {
+    double num;
+    char ch;
+    while (scanf("%lf", &num) != 1) {
+        while ((ch = getchar()) != '\n' && ch != EOF);
+        printf("Invalid input. Please try again:\n>>> ");
+    }
+    return num;
 }

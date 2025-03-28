@@ -24,5 +24,7 @@ struct BankAccount* findAccount(struct BankAccount *accounts, int counter, int a
 void logTransaction(int accountNumber, const char *transactionType, double originalBalance, double newBalance);
 void displayReceipt(const char *accountHolder, const char *transactionType, double originalBalance, double newBalance);
 void saveAccountsToCSV(const char *filename, struct BankAccount *accounts, int accountCount);
+int getValidInt();
+double getValidDouble();
 
 #endif // PROGRAMMING_ASSIGNMENT_ALGORITHM_H

@@ -19,6 +19,8 @@ struct BankAccount* findAccount(struct BankAccount *accounts, int counter, int a
 void logTransaction(int accountNumber, const char *transactionType, double originalBalance, double newBalance);
 void displayReceipt(const char *accountHolder, const char *transactionType, double originalBalance, double newBalance);
 void saveAccountsToCSV(const char *filename, struct BankAccount *accounts, int accountCount);
+int getValidInt();
+double getValidDouble();
 
 
 // Define struct BankAccount before using it anywhere
@@ -291,17 +293,32 @@ void saveAccountsToCSV(const char *filename, struct BankAccount *accounts, int a
     fclose(file);
 }
 
+// Helper function to safely read an integer
+int getValidInt() {
+    int num;
+    char ch;
+    while (scanf("%d", &num) != 1) {
+        while ((ch = getchar()) != '\n' && ch != EOF);  // Clear buffer
+        printf("Invalid input. Please try again:\n>>> ");
+    }
+    return num;
+}
+
+// Helper function to safely read a double
+double getValidDouble(const char *prompt) {
+    double num;
+    char ch;
+
+    printf("%s", prompt);
+    while (scanf("%lf", &num) != 1) {
+        while ((ch = getchar()) != '\n' && ch != EOF);
+        printf("Invalid input. Please try again:\n>>> ");
+    }
+    return num;
+}
+
 
 int main() {
-    test_checkPin();
-    test_checkBlocked();
-    test_withdraw();
-    test_deposit();
-    test_changePin();
-    test_showBalance();
-    test_findAccount();
-
-    printf("All unit tests passed successfully! Now let's go on for the ATM Machine ;)\n\n");
     int accountCount;
     // Load accounts once at the beginning
     struct BankAccount *accounts = loadAccountsFromCSV("accounts.csv", &accountCount);
@@ -310,16 +327,13 @@ int main() {
         return 1;
     }
     while (true) {
-        int selectedCard;
         struct BankAccount *account = NULL;
-        int pin, pinAttempts;
-        int choice;
+        int pinAttempts;
         double amount;
-
         // Card selection
         printf("\nWelcome to the ATM Machine created by Kirill!\n"
                "Select a card (e.g., 1 for Card 1, 2 for Card 2). Enter 0 to Quit the Program:\n>>> ");
-        scanf("%d", &selectedCard);
+        int selectedCard = getValidInt();
         if (selectedCard == 0) {
             printf("Exiting program. Thanks for using the ATM!.\n");
             // Save updated accounts before exiting.
@@ -340,7 +354,7 @@ int main() {
         bool pinVerified = false;
         while (pinAttempts < 3 && !pinVerified) {
             printf("Enter PIN (exactly 4 digits):\n>>> ");
-            scanf("%d", &pin);
+            int pin = getValidInt();
             if (checkPin(account, pin)) {
                 pinVerified = true;
             } else {
@@ -366,17 +380,16 @@ int main() {
             printf("5. Eject Card (return to card selection)\n");
             printf("6. Quit the ATM\n");
             printf("Select an option:\n>>> ");
-            scanf("%d", &choice);
+            int choice = getValidInt();
 
             double originalBalance = account->balance;
             const char *result;
             switch (choice) {
                 case 1: {
-                    int newPin1, newPin2;
                     printf("Enter new PIN:\n>>> ");
-                    scanf("%d", &newPin1);
+                    int newPin1 = getValidInt();
                     printf("Re-enter new PIN:\n>>> ");
-                    scanf("%d", &newPin2);
+                    int newPin2 = getValidInt();
                     result = changePin(account, newPin1, newPin2);
                     printf("%s\n", result);
                     logTransaction(account->accountNumber, "Change PIN", 0, 0);
@@ -425,3 +438,4 @@ int main() {
         }
     }
 }
+
