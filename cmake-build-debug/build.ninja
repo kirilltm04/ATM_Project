@@ -49,17 +49,9 @@ cmake_ninja_workdir = /Users/kirilltm04/Work/Progs/C$:C++/Kaplan/Programming_Ass
 
 build cmake_object_order_depends_target_Programming_Assignment: phony || CMakeFiles/Programming_Assignment.dir
 
-build CMakeFiles/Programming_Assignment.dir/algorithm.c.o: C_COMPILER__Programming_Assignment_Debug /Users/kirilltm04/Work/Progs/C$:C++/Kaplan/Programming_Assignment/algorithm.c || cmake_object_order_depends_target_Programming_Assignment
-  DEP_FILE = CMakeFiles/Programming_Assignment.dir/algorithm.c.o.d
-  FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk
-  INCLUDES = -I/opt/local/include/gtk-4.0 -I/opt/local/include/pango-1.0 -I/opt/local/include/harfbuzz -I/opt/local/include/fribidi -I/opt/local/include -I/opt/local/include/gdk-pixbuf-2.0 -I/opt/local/include/cairo -I/opt/local/include/pixman-1 -I/opt/local/include/freetype2 -I/opt/local/include/libpng16 -I/opt/local/include/graphene-1.0 -I/opt/local/lib/graphene-1.0/include -I/opt/local/include/glib-2.0 -I/opt/local/lib/glib-2.0/include
-  OBJECT_DIR = CMakeFiles/Programming_Assignment.dir
-  OBJECT_FILE_DIR = CMakeFiles/Programming_Assignment.dir
-
 build CMakeFiles/Programming_Assignment.dir/main.c.o: C_COMPILER__Programming_Assignment_Debug /Users/kirilltm04/Work/Progs/C$:C++/Kaplan/Programming_Assignment/main.c || cmake_object_order_depends_target_Programming_Assignment
   DEP_FILE = CMakeFiles/Programming_Assignment.dir/main.c.o.d
   FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk
-  INCLUDES = -I/opt/local/include/gtk-4.0 -I/opt/local/include/pango-1.0 -I/opt/local/include/harfbuzz -I/opt/local/include/fribidi -I/opt/local/include -I/opt/local/include/gdk-pixbuf-2.0 -I/opt/local/include/cairo -I/opt/local/include/pixman-1 -I/opt/local/include/freetype2 -I/opt/local/include/libpng16 -I/opt/local/include/graphene-1.0 -I/opt/local/lib/graphene-1.0/include -I/opt/local/include/glib-2.0 -I/opt/local/lib/glib-2.0/include
   OBJECT_DIR = CMakeFiles/Programming_Assignment.dir
   OBJECT_FILE_DIR = CMakeFiles/Programming_Assignment.dir
 
@@ -71,15 +63,128 @@ build CMakeFiles/Programming_Assignment.dir/main.c.o: C_COMPILER__Programming_As
 #############################################
 # Link the executable Programming_Assignment
 
-build Programming_Assignment: C_EXECUTABLE_LINKER__Programming_Assignment_Debug CMakeFiles/Programming_Assignment.dir/algorithm.c.o CMakeFiles/Programming_Assignment.dir/main.c.o
+build Programming_Assignment: C_EXECUTABLE_LINKER__Programming_Assignment_Debug CMakeFiles/Programming_Assignment.dir/main.c.o
   FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk
-  LINK_LIBRARIES = -Wl,-rpath,/opt/local/lib  -lgtk-4  -lpangocairo-1.0  -lpango-1.0  -lharfbuzz  -lgdk_pixbuf-2.0  -lcairo-gobject  -lcairo  -lgraphene-1.0  -lgio-2.0  -lgobject-2.0  -lglib-2.0  -lintl  -lsqlite3
-  LINK_PATH = -L/opt/local/lib
   OBJECT_DIR = CMakeFiles/Programming_Assignment.dir
   POST_BUILD = :
   PRE_LINK = :
   TARGET_FILE = Programming_Assignment
   TARGET_PDB = Programming_Assignment.dbg
+
+# =============================================================================
+# Object build statements for EXECUTABLE target Programming_Assignment_Text
+
+
+#############################################
+# Order-only phony target for Programming_Assignment_Text
+
+build cmake_object_order_depends_target_Programming_Assignment_Text: phony || CMakeFiles/Programming_Assignment_Text.dir
+
+build CMakeFiles/Programming_Assignment_Text.dir/algorithm.c.o: C_COMPILER__Programming_Assignment_Text_Debug /Users/kirilltm04/Work/Progs/C$:C++/Kaplan/Programming_Assignment/algorithm.c || cmake_object_order_depends_target_Programming_Assignment_Text
+  DEP_FILE = CMakeFiles/Programming_Assignment_Text.dir/algorithm.c.o.d
+  FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk
+  OBJECT_DIR = CMakeFiles/Programming_Assignment_Text.dir
+  OBJECT_FILE_DIR = CMakeFiles/Programming_Assignment_Text.dir
+
+build CMakeFiles/Programming_Assignment_Text.dir/main_text.c.o: C_COMPILER__Programming_Assignment_Text_Debug /Users/kirilltm04/Work/Progs/C$:C++/Kaplan/Programming_Assignment/main_text.c || cmake_object_order_depends_target_Programming_Assignment_Text
+  DEP_FILE = CMakeFiles/Programming_Assignment_Text.dir/main_text.c.o.d
+  FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk
+  OBJECT_DIR = CMakeFiles/Programming_Assignment_Text.dir
+  OBJECT_FILE_DIR = CMakeFiles/Programming_Assignment_Text.dir
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target Programming_Assignment_Text
+
+
+#############################################
+# Link the executable Programming_Assignment_Text
+
+build Programming_Assignment_Text: C_EXECUTABLE_LINKER__Programming_Assignment_Text_Debug CMakeFiles/Programming_Assignment_Text.dir/algorithm.c.o CMakeFiles/Programming_Assignment_Text.dir/main_text.c.o
+  FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk
+  OBJECT_DIR = CMakeFiles/Programming_Assignment_Text.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = Programming_Assignment_Text
+  TARGET_PDB = Programming_Assignment_Text.dbg
+
+# =============================================================================
+# Object build statements for EXECUTABLE target Programming_Assignment_Tests
+
+
+#############################################
+# Order-only phony target for Programming_Assignment_Tests
+
+build cmake_object_order_depends_target_Programming_Assignment_Tests: phony || CMakeFiles/Programming_Assignment_Tests.dir
+
+build CMakeFiles/Programming_Assignment_Tests.dir/algorithm.c.o: C_COMPILER__Programming_Assignment_Tests_Debug /Users/kirilltm04/Work/Progs/C$:C++/Kaplan/Programming_Assignment/algorithm.c || cmake_object_order_depends_target_Programming_Assignment_Tests
+  DEP_FILE = CMakeFiles/Programming_Assignment_Tests.dir/algorithm.c.o.d
+  FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk
+  OBJECT_DIR = CMakeFiles/Programming_Assignment_Tests.dir
+  OBJECT_FILE_DIR = CMakeFiles/Programming_Assignment_Tests.dir
+
+build CMakeFiles/Programming_Assignment_Tests.dir/unittest.c.o: C_COMPILER__Programming_Assignment_Tests_Debug /Users/kirilltm04/Work/Progs/C$:C++/Kaplan/Programming_Assignment/unittest.c || cmake_object_order_depends_target_Programming_Assignment_Tests
+  DEP_FILE = CMakeFiles/Programming_Assignment_Tests.dir/unittest.c.o.d
+  FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk
+  OBJECT_DIR = CMakeFiles/Programming_Assignment_Tests.dir
+  OBJECT_FILE_DIR = CMakeFiles/Programming_Assignment_Tests.dir
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target Programming_Assignment_Tests
+
+
+#############################################
+# Link the executable Programming_Assignment_Tests
+
+build Programming_Assignment_Tests: C_EXECUTABLE_LINKER__Programming_Assignment_Tests_Debug CMakeFiles/Programming_Assignment_Tests.dir/algorithm.c.o CMakeFiles/Programming_Assignment_Tests.dir/unittest.c.o
+  FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk
+  OBJECT_DIR = CMakeFiles/Programming_Assignment_Tests.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = Programming_Assignment_Tests
+  TARGET_PDB = Programming_Assignment_Tests.dbg
+
+# =============================================================================
+# Object build statements for EXECUTABLE target Programming_Assignment_Gui
+
+
+#############################################
+# Order-only phony target for Programming_Assignment_Gui
+
+build cmake_object_order_depends_target_Programming_Assignment_Gui: phony || CMakeFiles/Programming_Assignment_Gui.dir
+
+build CMakeFiles/Programming_Assignment_Gui.dir/algorithm.c.o: C_COMPILER__Programming_Assignment_Gui_Debug /Users/kirilltm04/Work/Progs/C$:C++/Kaplan/Programming_Assignment/algorithm.c || cmake_object_order_depends_target_Programming_Assignment_Gui
+  DEP_FILE = CMakeFiles/Programming_Assignment_Gui.dir/algorithm.c.o.d
+  FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk
+  INCLUDES = -I/opt/local/include/gtk-4.0 -I/opt/local/include/pango-1.0 -I/opt/local/include/harfbuzz -I/opt/local/include/fribidi -I/opt/local/include -I/opt/local/include/gdk-pixbuf-2.0 -I/opt/local/include/cairo -I/opt/local/include/pixman-1 -I/opt/local/include/freetype2 -I/opt/local/include/libpng16 -I/opt/local/include/graphene-1.0 -I/opt/local/lib/graphene-1.0/include -I/opt/local/include/glib-2.0 -I/opt/local/lib/glib-2.0/include
+  OBJECT_DIR = CMakeFiles/Programming_Assignment_Gui.dir
+  OBJECT_FILE_DIR = CMakeFiles/Programming_Assignment_Gui.dir
+
+build CMakeFiles/Programming_Assignment_Gui.dir/gui.c.o: C_COMPILER__Programming_Assignment_Gui_Debug /Users/kirilltm04/Work/Progs/C$:C++/Kaplan/Programming_Assignment/gui.c || cmake_object_order_depends_target_Programming_Assignment_Gui
+  DEP_FILE = CMakeFiles/Programming_Assignment_Gui.dir/gui.c.o.d
+  FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk
+  INCLUDES = -I/opt/local/include/gtk-4.0 -I/opt/local/include/pango-1.0 -I/opt/local/include/harfbuzz -I/opt/local/include/fribidi -I/opt/local/include -I/opt/local/include/gdk-pixbuf-2.0 -I/opt/local/include/cairo -I/opt/local/include/pixman-1 -I/opt/local/include/freetype2 -I/opt/local/include/libpng16 -I/opt/local/include/graphene-1.0 -I/opt/local/lib/graphene-1.0/include -I/opt/local/include/glib-2.0 -I/opt/local/lib/glib-2.0/include
+  OBJECT_DIR = CMakeFiles/Programming_Assignment_Gui.dir
+  OBJECT_FILE_DIR = CMakeFiles/Programming_Assignment_Gui.dir
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target Programming_Assignment_Gui
+
+
+#############################################
+# Link the executable Programming_Assignment_Gui
+
+build Programming_Assignment_Gui: C_EXECUTABLE_LINKER__Programming_Assignment_Gui_Debug CMakeFiles/Programming_Assignment_Gui.dir/algorithm.c.o CMakeFiles/Programming_Assignment_Gui.dir/gui.c.o
+  FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk
+  LINK_LIBRARIES = -Wl,-rpath,/opt/local/lib  -lgtk-4  -lpangocairo-1.0  -lpango-1.0  -lharfbuzz  -lgdk_pixbuf-2.0  -lcairo-gobject  -lcairo  -lgraphene-1.0  -lgio-2.0  -lgobject-2.0  -lglib-2.0  -lintl
+  LINK_PATH = -L/opt/local/lib
+  OBJECT_DIR = CMakeFiles/Programming_Assignment_Gui.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = Programming_Assignment_Gui
+  TARGET_PDB = Programming_Assignment_Gui.dbg
 
 
 #############################################
@@ -115,7 +220,7 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 #############################################
 # Folder: /Users/kirilltm04/Work/Progs/C:C++/Kaplan/Programming_Assignment/cmake-build-debug
 
-build all: phony Programming_Assignment
+build all: phony Programming_Assignment Programming_Assignment_Text Programming_Assignment_Tests Programming_Assignment_Gui
 
 # =============================================================================
 # Built-in targets

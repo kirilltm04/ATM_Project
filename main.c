@@ -1,10 +1,307 @@
+//
+// Created by Kirill Tumoian on 28.03.2025.
+//
 #include <stdio.h>
-#include <stdlib.h>
+#include <stdbool.h>
 #include <string.h>
-#include "algorithm.h"
+#include <stdlib.h>
+#include <assert.h>
+
+// Function prototypes
+struct BankAccount* loadAccountsFromCSV(const char *filename, int *accountCount);
+const char* withdraw(struct BankAccount *account, double amount);
+const char* deposit(struct BankAccount *account, double amount);
+bool checkPin(struct BankAccount *account, int enteredPin);  // PIN verification
+bool checkBlocked(struct BankAccount *account);
+const char* changePin(struct BankAccount *account, int newPin1, int newPin2);
+const char* showBalance (struct BankAccount *account);
+struct BankAccount* findAccount(struct BankAccount *accounts, int counter, int accountNumber);
+void logTransaction(int accountNumber, const char *transactionType, double originalBalance, double newBalance);
+void displayReceipt(const char *accountHolder, const char *transactionType, double originalBalance, double newBalance);
+void saveAccountsToCSV(const char *filename, struct BankAccount *accounts, int accountCount);
+
+
+// Define struct BankAccount before using it anywhere
+struct BankAccount {
+    int accountNumber;
+    char accountHolder[50];
+    double balance;
+    int pinCode;
+    bool blocked;
+};
+
+
+bool checkPin(struct BankAccount *account, int enteredPin) {
+    if (enteredPin == account->pinCode) {
+        return true;
+    }
+    return false;
+}
+
+// Test Checking Pin
+void test_checkPin() {
+    struct BankAccount account = {123, "Test User", 100.0, 1234, false};
+    assert(checkPin(&account, 1234) == 1);
+    assert(checkPin(&account, 0000) == 0);
+}
+
+bool checkBlocked(struct BankAccount *account) {
+    return account->blocked;
+}
+
+// Test blocked status check
+void test_checkBlocked() {
+    struct BankAccount account = {123, "Test User", 100.0, 1234, false};
+    assert(checkBlocked(&account) == 0);
+    account.blocked = true;
+    assert(checkBlocked(&account) == 1);
+}
+
+const char* withdraw(struct BankAccount *account, double amount) {
+    if (amount <= 0) {
+        return "Invalid withdrawal amount!";
+    }
+    // Ensure the withdrawal amount is a multiple of 5.
+    if ((int)amount % 5 != 0) {
+        return "Amount must be a multiple of 5, 10 or 20!";
+    }
+    if (account->balance >= amount) {
+        account->balance -= amount;
+        static char msg[100];
+        snprintf(msg, 100, "Withdrawal successful! New balance: £%.2f", account->balance);
+        return msg;
+    }
+    return "Insufficient funds!";
+}
+
+// Test withdrawal function
+void test_withdraw() {
+    struct BankAccount account = {123, "Test User", 100.0, 1234, false};
+
+    // Negative amount should fail.
+    const char* result = withdraw(&account, -10);
+    assert(strcmp(result, "Invalid withdrawal amount!") == 0);
+
+    // Withdrawal amount that is not a multiple of 5 should fail.
+    result = withdraw(&account, 7);
+    assert(strcmp(result, "Amount must be a multiple of 5, 10 or 20!") == 0);
+
+    // Attempting to withdraw more than the balance.
+    result = withdraw(&account, 105);
+    assert(strcmp(result, "Insufficient funds!") == 0);
+
+    // Valid withdrawal.
+    result = withdraw(&account, 50);
+    // Check that the message indicates success.
+    assert(strstr(result, "Withdrawal successful!") != 0);
+    // Verify that the account balance has been updated.
+    assert(account.balance == 50.0);
+
+    result = withdraw(&account, 50);
+    // Check that the message indicates success.
+    assert(strstr(result, "Withdrawal successful!") != 0);
+    // Verify that the account balance has been updated.
+    assert(account.balance == 0.0);
+
+    result = withdraw(&account, 20);
+    // Check that the message indicates success.
+    assert(strstr(result, "Insufficient funds!") != 0);
+    // Verify that the account balance has been updated.
+    assert(account.balance == 0.0);
+}
+
+const char* deposit(struct BankAccount *account, double amount) {
+    if (amount <= 0) {
+        return "Invalid deposit amount!";
+    }
+    account->balance += amount;
+    static char msg[100];
+    snprintf(msg, sizeof(msg), "Deposit successful! New balance: £%.2f", account->balance);
+    return msg;
+}
+
+// Test deposit function
+void test_deposit() {
+    struct BankAccount account = {123, "Test User", 100.0, 1234, false};
+
+    // Negative deposit should fail.
+    const char* result = deposit(&account, -10);
+    assert(strcmp(result, "Invalid deposit amount!") == 0);
+
+    // Valid deposit.
+    result = deposit(&account, 50);
+    assert(strstr(result, "Deposit successful!") != 0);
+    assert(account.balance == 150.0);
+
+    result = deposit(&account, 1000);
+    assert(strstr(result, "Deposit successful!") != 0);
+    assert(account.balance == 1150.0);
+}
+
+const char* changePin(struct BankAccount *account, int newPin1, int newPin2) {
+    if (newPin1 != newPin2) {
+        return "Error: PINs do not match!";
+    }
+    if (newPin1 < 1000 || newPin1 > 9999) { // Ensure exactly 4 digits
+        return "Error: PIN must be exactly 4 digits!";
+    }
+    account->pinCode = newPin1;
+    return "PIN successfully changed!";
+}
+
+// Test changing PIN
+void test_changePin() {
+    struct BankAccount account = {123, "Test User", 100.0, 1234, false};
+
+    // Mismatched new PINs.
+    const char* result = changePin(&account, 1111, 2222);
+    assert(strcmp(result, "Error: PINs do not match!") == 0);
+
+    // New PIN not exactly 4 digits.
+    result = changePin(&account, 99, 99);
+    assert(strcmp(result, "Error: PIN must be exactly 4 digits!") == 0);
+
+    result = changePin(&account, 222222, 222222);
+    assert(strcmp(result, "Error: PIN must be exactly 4 digits!") == 0);
+
+    // Valid PIN change.
+    result = changePin(&account, 4321, 4321);
+    assert(strcmp(result, "PIN successfully changed!") == 0);
+    assert(account.pinCode == 4321);
+}
+
+const char* showBalance(struct BankAccount *account) {
+    static char msg[100];
+    snprintf(msg, sizeof(msg), "Your current balance is: £%.2f", account->balance);
+    return msg;
+}
+
+// Test balance display
+void test_showBalance() {
+    struct BankAccount account = {123, "Test User", 100.0, 1234, false};
+    const char* result = showBalance(&account);
+    // Check that the string contains the correct formatted balance.
+    assert(strstr(result, "£100.00") != 0);
+}
+
+// Logging function that appends the transaction details to "log.txt"
+void logTransaction(int accountNumber, const char *transactionType, double originalBalance, double newBalance) {
+    FILE *logFile = fopen("log.txt", "a");
+    if (logFile != NULL) {
+        fprintf(logFile, "Account %d - %s: Original Balance = £%.2f, New Balance = £%.2f\n",
+                accountNumber, transactionType, originalBalance, newBalance);
+        fclose(logFile);
+    } else {
+        printf("Error: Could not open log file.\n");
+    }
+}
+
+// Function to optionally display a receipt on the screen
+void displayReceipt(const char *accountHolder, const char *transactionType, double originalBalance, double newBalance) {
+    char choice;
+    printf("Do you want a receipt? (y/n): ");
+    scanf(" %c", &choice);
+    if(choice == 'y' || choice == 'Y') {
+        printf("\n---- Transaction Receipt ----\n");
+        printf("Transaction: %s\n", transactionType);
+        printf("Original Balance: £%.2f\n", originalBalance);
+        printf("New Balance: £%.2f\n", newBalance);
+        printf("Thank you, %s\n", accountHolder);
+        printf("------------------------------\n");
+    }
+}
+
+// This function reads the CSV file and fills a static array of BankAccount.
+// It returns a pointer to that array and sets *accountCount to the number of accounts read.
+struct BankAccount* loadAccountsFromCSV(const char *filename, int *accountCount) {
+    int numberOfAccounts = 2;
+    struct BankAccount *accountList = malloc(numberOfAccounts * sizeof(struct BankAccount));
+    FILE *file = fopen(filename, "r");
+    if (!file) {
+        printf("Error: Could not open %s\n", filename);
+        *accountCount = 0;
+        return accountList;
+    }
+    char line[256];
+    // Skip the header line.
+    if (fgets(line, sizeof(line), file) == NULL) {
+        fclose(file);
+        *accountCount = 0;
+        return accountList;
+    }
+    *accountCount = 0;
+    while (fgets(line, sizeof(line), file) != NULL && *accountCount < numberOfAccounts) {
+        int accNum, pin, blockedInt;
+        double balance;
+        char name[50];
+        // Parse the CSV line.
+        if (sscanf(line, "%d,%49[^,],%lf,%d,%d", &accNum, name, &balance, &pin, &blockedInt) == 5) {
+            accountList[*accountCount].accountNumber = accNum;
+            strcpy(accountList[*accountCount].accountHolder, name);
+            accountList[*accountCount].balance = balance;
+            accountList[*accountCount].pinCode = pin;
+            accountList[*accountCount].blocked = (blockedInt != 0);
+            (*accountCount)++;
+        }
+    }
+    fclose(file);
+    return accountList;
+}
+
+struct BankAccount* findAccount(struct BankAccount *accounts, int counter, int accountNumber) {
+    for (int i = 0; i < counter; i++) {
+        if (accounts[i].accountNumber == accountNumber) {
+            return &accounts[i];
+        }
+    }
+    return NULL;
+}
+
+// Test finding an account
+void test_findAccount() {
+    struct BankAccount accounts[2] = {
+            {1, "Kirill", 100.0, 1111, false},
+            {2, "Madiyar", 200.0, 2222, false}
+    };
+
+    struct BankAccount* acc = findAccount(accounts, 2, 1);
+    assert(acc != NULL);
+    assert(acc->accountNumber == 1);
+    acc = findAccount(accounts, 2, 3);
+    assert(acc == NULL);
+}
+
+void saveAccountsToCSV(const char *filename, struct BankAccount *accounts, int accountCount) {
+    FILE *file = fopen(filename, "w");
+    if (!file) {
+        printf("Error: Could not open %s for writing.\n", filename);
+        return;
+    }
+    // Write the CSV header
+    fprintf(file, "AccountNumber,AccountHolder,Balance,PinCode,Blocked\n");
+    // Write each account's details
+    for (int i = 0; i < accountCount; i++) {
+        fprintf(file, "%d,%s,%.2f,%d,%d\n",
+                accounts[i].accountNumber,
+                accounts[i].accountHolder,
+                accounts[i].balance,
+                accounts[i].pinCode,
+                accounts[i].blocked ? 1 : 0);
+    }
+    fclose(file);
+}
 
 
 int main() {
+    test_checkPin();
+    test_checkBlocked();
+    test_withdraw();
+    test_deposit();
+    test_changePin();
+    test_showBalance();
+    test_findAccount();
+
+    printf("All unit tests passed successfully! Now let's go on for the ATM Machine ;)\n\n");
     int accountCount;
     // Load accounts once at the beginning
     struct BankAccount *accounts = loadAccountsFromCSV("accounts.csv", &accountCount);
@@ -67,7 +364,7 @@ int main() {
             printf("3. Withdraw\n");
             printf("4. Deposit\n");
             printf("5. Eject Card (return to card selection)\n");
-            printf("6. Quit\n");
+            printf("6. Quit the ATM\n");
             printf("Select an option:\n>>> ");
             scanf("%d", &choice);
 
@@ -82,7 +379,7 @@ int main() {
                     scanf("%d", &newPin2);
                     result = changePin(account, newPin1, newPin2);
                     printf("%s\n", result);
-                    logTransaction(account->accountNumber, "Change PIN", originalBalance, account->balance);
+                    logTransaction(account->accountNumber, "Change PIN", 0, 0);
                     break;
                 }
                 case 2: {
