@@ -40,9 +40,21 @@ void test_withdraw() {
     // Valid withdrawal.
     result = withdraw(&account, 50);
     // Check that the message indicates success.
-    assert(strstr(result, "Withdrawal successful!") != NULL);
+    assert(strstr(result, "Withdrawal successful!") != 0);
     // Verify that the account balance has been updated.
     assert(account.balance == 50.0);
+
+    result = withdraw(&account, 50);
+    // Check that the message indicates success.
+    assert(strstr(result, "Withdrawal successful!") != 0);
+    // Verify that the account balance has been updated.
+    assert(account.balance == 0.0);
+
+    result = withdraw(&account, 20);
+    // Check that the message indicates success.
+    assert(strstr(result, "Insufficient funds!") != 0);
+    // Verify that the account balance has been updated.
+    assert(account.balance == 0.0);
 }
 
 // Test deposit function
@@ -55,8 +67,12 @@ void test_deposit() {
 
     // Valid deposit.
     result = deposit(&account, 50);
-    assert(strstr(result, "Deposit successful!") != NULL);
+    assert(strstr(result, "Deposit successful!") != 0);
     assert(account.balance == 150.0);
+
+    result = deposit(&account, 1000);
+    assert(strstr(result, "Deposit successful!") != 0);
+    assert(account.balance == 1150.0);
 }
 
 // Test changing PIN
@@ -71,6 +87,9 @@ void test_changePin() {
     result = changePin(&account, 99, 99);
     assert(strcmp(result, "Error: PIN must be exactly 4 digits!") == 0);
 
+    result = changePin(&account, 222222, 222222);
+    assert(strcmp(result, "Error: PIN must be exactly 4 digits!") == 0);
+
     // Valid PIN change.
     result = changePin(&account, 4321, 4321);
     assert(strcmp(result, "PIN successfully changed!") == 0);
@@ -82,14 +101,14 @@ void test_showBalance() {
     struct BankAccount account = {123, "Test User", 100.0, 1234, false};
     const char* result = showBalance(&account);
     // Check that the string contains the correct formatted balance.
-    assert(strstr(result, "£100.00") != NULL);
+    assert(strstr(result, "£100.00") != 0);
 }
 
 // Test finding an account
 void test_findAccount() {
     struct BankAccount accounts[2] = {
-            {1, "Alice", 100.0, 1111, false},
-            {2, "Bob", 200.0, 2222, false}
+            {1, "Kirill", 100.0, 1111, false},
+            {2, "Madiyar", 200.0, 2222, false}
     };
 
     struct BankAccount* acc = findAccount(accounts, 2, 1);
@@ -108,6 +127,6 @@ int main() {
     test_showBalance();
     test_findAccount();
 
-    printf("All unit tests passed successfully.\n");
+    printf("All unit tests passed successfully! ;)\n");
     return 0;
 }

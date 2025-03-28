@@ -33,3 +33,8 @@ Account 2 - Deposit: Original Balance = £1348.50, New Balance = £2348.50
 Account 2 - Deposit: Original Balance = £1348.50, New Balance = £2348.50
 Account 2 - Check Balance: Original Balance = £2348.50, New Balance = £2348.50
 Account 2 - Card Retained: Original Balance = £0.00, New Balance = £0.00
+Account 2 - Check Balance: Original Balance = £2348.50, New Balance = £2348.50
+Account 2 - Withdrawal: Original Balance = £2348.50, New Balance = £1348.50
+Account 2 - Deposit: Original Balance = £1348.50, New Balance = £1448.50
+Account 2 - Withdrawal: Original Balance = £1448.50, New Balance = £1248.50
+Account 2 - Change PIN: Original Balance = £1248.50, New Balance = £1248.50

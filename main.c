@@ -3,6 +3,7 @@
 #include <string.h>
 #include "algorithm.h"
 
+
 int main() {
     int accountCount;
     // Load accounts once at the beginning
@@ -19,8 +20,15 @@ int main() {
         double amount;
 
         // Card selection
-        printf("\nSelect a card (e.g., 1 for Card 1, 2 for Card 2):\n>>> ");
+        printf("\nWelcome to the ATM Machine created by Kirill!\n"
+               "Select a card (e.g., 1 for Card 1, 2 for Card 2). Enter 0 to Quit the Program:\n>>> ");
         scanf("%d", &selectedCard);
+        if (selectedCard == 0) {
+            printf("Exiting program. Thanks for using the ATM!.\n");
+            // Save updated accounts before exiting.
+            saveAccountsToCSV("accounts.csv", accounts, accountCount);
+            exit(0);
+        }
         account = findAccount(accounts, accountCount, selectedCard);
         if (account == NULL) {
             printf("Invalid card selection.\n");
@@ -110,7 +118,7 @@ int main() {
                     printf("Card ejected. Returning to card selection...\n");
                     break;
                 case 6:
-                    printf("Exiting program. Please take your card.\n");
+                    printf("Exiting program. Please take your card. Thanks for using the ATM!\n");
                     // Save updated accounts before exiting.
                     saveAccountsToCSV("accounts.csv", accounts, accountCount);
                     exit(0);
