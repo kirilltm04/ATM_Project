@@ -33,7 +33,7 @@ void test_withdraw() {
     result = withdraw(&account, 7);
     assert(strcmp(result, "Amount must be a multiple of 5, 10 or 20!") == 0);
 
-    result = withdraw(&account, 45);
+    result = withdraw(&account, 42);
     assert(strcmp(result, "Amount must be a multiple of 5, 10 or 20!") == 0);
 
     // Attempting to withdraw more than the balance.

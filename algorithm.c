@@ -32,7 +32,7 @@ const char* withdraw(struct BankAccount *account, double amount) {
         return "Invalid withdrawal amount!";
     }
     // Ensure the withdrawal amount is a multiple of 5.
-    if ((int)amount % 10 != 0) {
+    if ((int)amount % 5 != 0) {
         return "Amount must be a multiple of 5, 10 or 20!";
     }
     if (account->balance >= amount) {
