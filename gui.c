@@ -1,9 +1,7 @@
 //
 // Created by Kirill Tumoian on 28.03.2025.
 //
-//
-// Created by Kirill Tumoian on 26.03.2025.
-//
+
 #include <gtk/gtk.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -187,18 +185,15 @@ static void on_submit_new_pin(GtkWidget *widget, gpointer user_data) {
     GtkWidget *result_label = gtk_label_new(message);
     GtkWidget *back_button = gtk_button_new_with_label("Back to Menu");
     g_signal_connect(back_button, "clicked", G_CALLBACK(on_back_from_change), app_data);
-
     /* Add the new widgets to the change PIN screen container. */
     gtk_box_append(GTK_BOX(app_data->change_pin_screen), result_label);
     gtk_box_append(GTK_BOX(app_data->change_pin_screen), back_button);
-
     /* Show the updated change PIN screen */
     gtk_widget_show(app_data->change_pin_screen);
 }
 
 static void on_open_change_pin(GtkWidget *widget, gpointer user_data) {
     AppData *app_data = (AppData *)user_data;
-
     // Clear existing children from change_pin_screen
     GtkWidget *child = gtk_widget_get_first_child(app_data->change_pin_screen);
     while (child != NULL) {
@@ -206,7 +201,6 @@ static void on_open_change_pin(GtkWidget *widget, gpointer user_data) {
         gtk_widget_unparent(child);
         child = next;
     }
-
     // Rebuild the original Change PIN UI
     GtkWidget *change_label = gtk_label_new("Enter new PIN:");
     app_data->new_pin_entry1 = gtk_entry_new();
@@ -229,8 +223,6 @@ static void on_open_change_pin(GtkWidget *widget, gpointer user_data) {
     clear_balance_label(app_data);
     switch_screen(app_data, "change_pin");
 }
-
-
 
 // Back from main menu to card selection.
 static void on_back_to_card_selection(GtkWidget *widget, gpointer user_data) {
@@ -296,7 +288,6 @@ static void on_withdraw_button(GtkWidget *widget, gpointer user_data) {
     gtk_editable_set_text(GTK_EDITABLE(app_data->withdraw_entry), "");
     switch_screen(app_data, "withdraw");
 }
-
 
 static void on_deposit_back(GtkWidget *widget, gpointer data) {
     AppData *a = (AppData *)data;
@@ -396,17 +387,14 @@ static void activate(GtkApplication *app, gpointer user_data) {
             "   background-color: #FFFFFF; "
             "   color: #333333; "
             "} ";
-
     gtk_css_provider_load_from_string(provider, css);
     GdkDisplay *display = gdk_display_get_default();
     gtk_style_context_add_provider_for_display(display, GTK_STYLE_PROVIDER(provider), GTK_STYLE_PROVIDER_PRIORITY_USER);
-
     AppData *app_data = g_new0(AppData, 1);
     app_data->main_window = window;
     app_data->stack = gtk_stack_new();
     gtk_widget_set_vexpand(app_data->stack, TRUE);
     gtk_widget_set_hexpand(app_data->stack, TRUE);
-
 
     /* ------------------ Card Selection Screen ------------------ */
     app_data->card_selection_screen = gtk_box_new(GTK_ORIENTATION_VERTICAL, 20);
@@ -425,7 +413,6 @@ static void activate(GtkApplication *app, gpointer user_data) {
     gtk_box_append(GTK_BOX(app_data->card_selection_screen), start_quit_button);
     g_signal_connect(start_quit_button, "clicked", G_CALLBACK(on_quit), app);
     gtk_stack_add_named(GTK_STACK(app_data->stack), app_data->card_selection_screen, "card_selection");
-
 
     /* ------------------ PIN Entry Screen ------------------ */
     app_data->pin_screen = gtk_box_new(GTK_ORIENTATION_VERTICAL, 20);
@@ -447,19 +434,14 @@ static void activate(GtkApplication *app, gpointer user_data) {
     app_data->main_menu_screen = gtk_box_new(GTK_ORIENTATION_VERTICAL, 30);
     gtk_widget_set_halign(app_data->main_menu_screen, GTK_ALIGN_CENTER);
     gtk_widget_set_valign(app_data->main_menu_screen, GTK_ALIGN_CENTER);
-
     GtkWidget *menu_grid = gtk_grid_new();
     gtk_grid_set_row_spacing(GTK_GRID(menu_grid), 20);
     gtk_grid_set_column_spacing(GTK_GRID(menu_grid), 20);
     gtk_widget_set_halign(menu_grid, GTK_ALIGN_CENTER);
     gtk_widget_set_valign(menu_grid, GTK_ALIGN_CENTER);
-
-
-
     // Main menu title.
     GtkWidget *menu_title = gtk_label_new("ATM Main Menu");
     gtk_grid_attach(GTK_GRID(menu_grid), menu_title, 0, 0, 2, 1);
-
     // Buttons arranged in grid.
     app_data->see_balance_button = gtk_button_new_with_label("Show Balance");
     app_data->deposit_button = gtk_button_new_with_label("Deposit Money");
@@ -467,14 +449,12 @@ static void activate(GtkApplication *app, gpointer user_data) {
     app_data->change_pin_button = gtk_button_new_with_label("Change PIN");
     app_data->back_button = gtk_button_new_with_label("Back to Card Selection");
     app_data->quit_button = gtk_button_new_with_label("Quit");
-
     gtk_grid_attach(GTK_GRID(menu_grid), app_data->see_balance_button, 0, 1, 1, 1);
     gtk_grid_attach(GTK_GRID(menu_grid), app_data->deposit_button, 1, 1, 1, 1);
     gtk_grid_attach(GTK_GRID(menu_grid), app_data->withdraw_button, 0, 2, 1, 1);
     gtk_grid_attach(GTK_GRID(menu_grid), app_data->change_pin_button, 1, 2, 1, 1);
     gtk_grid_attach(GTK_GRID(menu_grid), app_data->back_button, 0, 3, 1, 1);
     gtk_grid_attach(GTK_GRID(menu_grid), app_data->quit_button, 1, 3, 1, 1);
-
     g_signal_connect(app_data->see_balance_button, "clicked", G_CALLBACK(on_show_balance_full), app_data);
     g_signal_connect(app_data->deposit_button, "clicked", G_CALLBACK(on_deposit_button), app_data);
     g_signal_connect(app_data->withdraw_button, "clicked", G_CALLBACK(on_withdraw_button), app_data);
@@ -484,11 +464,8 @@ static void activate(GtkApplication *app, gpointer user_data) {
     gtk_box_append(GTK_BOX(app_data->main_menu_screen), menu_grid);
     gtk_stack_add_named(GTK_STACK(app_data->stack), app_data->main_menu_screen, "main_menu");
 
-
-
     /* ------------------ Deposit Screen ------------------ */
     GtkWidget *deposit_screen = gtk_box_new(GTK_ORIENTATION_VERTICAL, 20);
-
     gtk_widget_set_halign(deposit_screen, GTK_ALIGN_CENTER);
     gtk_widget_set_valign(deposit_screen, GTK_ALIGN_CENTER);
     GtkWidget *deposit_label = gtk_label_new("Enter Deposit Amount:");
@@ -507,12 +484,11 @@ static void activate(GtkApplication *app, gpointer user_data) {
     gtk_stack_add_named(GTK_STACK(app_data->stack), deposit_screen, "deposit");
 
     /* ------------------ Withdraw Screen ------------------ */
-/* ------------------ Withdraw Screen ------------------ */
     GtkWidget *withdraw_screen = gtk_box_new(GTK_ORIENTATION_VERTICAL, 20);
     gtk_widget_set_halign(withdraw_screen, GTK_ALIGN_CENTER);
     gtk_widget_set_valign(withdraw_screen, GTK_ALIGN_CENTER);
     GtkWidget *withdraw_label = gtk_label_new("Enter Withdrawal Amount:");
-// Create a new entry widget for withdrawal.
+    // Create a new entry widget for withdrawal.
     app_data->withdraw_entry = gtk_entry_new();
     gtk_entry_set_placeholder_text(GTK_ENTRY(app_data->withdraw_entry), "Amount to withdraw");
     g_signal_connect(app_data->withdraw_entry, "activate", G_CALLBACK(on_withdraw_confirm), app_data);
@@ -525,7 +501,6 @@ static void activate(GtkApplication *app, gpointer user_data) {
     g_signal_connect(confirm_withdraw_button, "clicked", G_CALLBACK(on_withdraw_confirm), app_data);
     g_signal_connect(withdraw_back, "clicked", G_CALLBACK(on_withdraw_back), app_data);
     gtk_stack_add_named(GTK_STACK(app_data->stack), withdraw_screen, "withdraw");
-
 
     /* ------------------ Full Screen Balance ------------------ */
     GtkWidget *balance_full_screen = gtk_box_new(GTK_ORIENTATION_VERTICAL, 20);
@@ -555,7 +530,6 @@ static void activate(GtkApplication *app, gpointer user_data) {
     g_signal_connect(app_data->submit_new_pin, "clicked", G_CALLBACK(on_submit_new_pin), app_data);
     g_signal_connect(app_data->back_from_change, "clicked", G_CALLBACK(on_back_from_change), app_data);
     gtk_stack_add_named(GTK_STACK(app_data->stack), app_data->change_pin_screen, "change_pin");
-
     app_data->receipt_menu_screen = gtk_box_new(GTK_ORIENTATION_VERTICAL, 20);
     app_data->receipt_label = gtk_label_new("Print receipt?");
     app_data->receipt_yes_button = gtk_button_new_with_label("Yes");
@@ -566,9 +540,6 @@ static void activate(GtkApplication *app, gpointer user_data) {
     g_signal_connect(app_data->receipt_yes_button, "clicked", G_CALLBACK(on_receipt_yes), app_data);
     g_signal_connect(app_data->receipt_no_button, "clicked", G_CALLBACK(on_receipt_no), app_data);
     gtk_stack_add_named(GTK_STACK(app_data->stack), app_data->receipt_menu_screen, "receipt_menu");
-
-
-
     app_data->error_screen = gtk_box_new(GTK_ORIENTATION_VERTICAL, 20);
     app_data->error_label = gtk_label_new("");
     app_data->error_back_button = gtk_button_new_with_label("Back to Menu");
@@ -577,21 +548,17 @@ static void activate(GtkApplication *app, gpointer user_data) {
     g_signal_connect(app_data->error_back_button, "clicked", G_CALLBACK(on_error_back), app_data);
     gtk_stack_add_named(GTK_STACK(app_data->stack), app_data->error_screen, "error");
 
-
-
     /* ------------------ Initialize Hardcoded Accounts ------------------ */
     app_data->account1.accountNumber = 1;
     snprintf(app_data->account1.accountHolder, sizeof(app_data->account1.accountHolder), "Kirill Tumoian");
     app_data->account1.balance = 1234.60;
     app_data->account1.pinCode = 1234;
     app_data->account1.blocked = false;
-
     app_data->account2.accountNumber = 2;
     snprintf(app_data->account2.accountHolder, sizeof(app_data->account2.accountHolder), "Andrew Bradley");
     app_data->account2.balance = 848.50;
     app_data->account2.pinCode = 5678;
     app_data->account2.blocked = false;
-
     switch_screen(app_data, "card_selection");
     gtk_window_set_child(GTK_WINDOW(window), app_data->stack);
     gtk_window_present(GTK_WINDOW(window));
