@@ -12,7 +12,7 @@
 struct BankAccount* loadAccountsFromCSV(const char *filename, int *accountCount);
 const char* withdraw(struct BankAccount *account, double amount);
 const char* deposit(struct BankAccount *account, double amount);
-bool checkPin(struct BankAccount *account, int enteredPin);  // PIN verification
+bool checkPin(struct BankAccount *account, int enteredPin);
 bool checkBlocked(struct BankAccount *account);
 const char* changePin(struct BankAccount *account, int newPin1, int newPin2);
 const char* showBalance (struct BankAccount *account);

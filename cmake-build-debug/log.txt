@@ -66,3 +66,6 @@ Account 1 - Change PIN: Original Balance = £0.00, New Balance = £0.00
 Account 1 - Withdrawal: Original Balance = £12346912.60, New Balance = £12346457.60
 Account 1 - Withdrawal: Original Balance = £12346457.60, New Balance = £12346017.60
 Account 1 - Withdrawal: Original Balance = £12346017.60, New Balance = £11111377.60
+Account 1 - Card Retained: Original Balance = £0.00, New Balance = £0.00
+Account 1 - Change PIN: Original Balance = £0.00, New Balance = £0.00
+Account 1 - Change PIN: Original Balance = £0.00, New Balance = £0.00
