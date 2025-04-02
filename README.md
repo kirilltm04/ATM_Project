@@ -52,6 +52,23 @@ The command-line version of the ATM operates through a structured text-based men
 
 This menu-driven approach provides a simple yet effective way to interact with the ATM simulator without requiring a graphical interface.
 
+### **GUI Features**
+- **Card Selection Screen:** Users can select a card from a dropdown list.
+- **PIN Entry:** A secure PIN entry screen with masked input and error tracking.
+- **Main Menu:** A structured interface with buttons for each ATM function.
+- **Transaction Screens:**
+  - **Balance Inquiry:** Displays the current account balance in a message box.
+  - **Deposit & Withdrawal:** Interactive input fields with validation.
+  - **PIN Change:** A step-by-step interface for changing the PIN.
+- **Receipt Generation:** An on-screen receipt summarizing each transaction.
+- **Logging:** All actions are recorded in `log.txt` for tracking.
+- **Session Management:** Users can eject the card or exit at any time.
+
+### **GUI Demonstration**
+Click the video below to see the **ATM Simulator in action**:
+
+📺 [GUI_Explanation.mp4](GUI_Explanation.mp4)
+
 ## Requirements
 
 - **Compiler:** GCC (or any standard C compiler)
@@ -68,13 +85,6 @@ Both unit and integration testing are integrated to ensure the functionality of 
 This project is licensed under the GNU GENERAL PUBLIC LICENSE License.
 
 ## Author
-
-<video width="600" controls>
-  <source src="GUI_Explanation.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
-
-
 
 Kirill Tumoian
 
