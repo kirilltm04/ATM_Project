@@ -69,7 +69,11 @@ This project is licensed under the GNU GENERAL PUBLIC LICENSE License.
 
 ## Author
 
-![ATM GUI Demo](GUI_Explanation.mp4)
+<video width="600" controls>
+  <source src="GUI_Explanation.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
 
 
 Kirill Tumoian
