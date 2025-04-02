@@ -69,6 +69,10 @@ This project is licensed under the GNU GENERAL PUBLIC LICENSE License.
 
 ## Author
 
+![ATM GUI Demo](GUI_Explanation.mp4)
+
+
 Kirill Tumoian
 
 ---
+
