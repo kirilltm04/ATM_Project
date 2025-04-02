@@ -145,6 +145,7 @@ void test_deposit() {
     assert(account.balance == 1150.0);
 }
 
+// Function to change the Pin of the card
 const char* changePin(struct BankAccount *account, int newPin1, int newPin2) {
     if (newPin1 != newPin2) {
         return "Error: PINs do not match!";
@@ -177,6 +178,7 @@ void test_changePin() {
     assert(account.pinCode == 4321);
 }
 
+// Gets the balance shown on the screen
 const char* showBalance(struct BankAccount *account) {
     static char msg[100];
     snprintf(msg, sizeof(msg), "Your current balance is: £%.2f", account->balance);
@@ -224,6 +226,7 @@ void displayReceipt(const char *accountHolder, const char *transactionType, doub
             printf("Invalid input! Please enter 'y' for yes or 'n' for no.\n");
         }
     }
+
     // Proceed if the input is valid
     if (choice == 'y' || choice == 'Y') {
         // Print the receipt
@@ -277,6 +280,7 @@ struct BankAccount* loadAccountsFromCSV(const char *filename, int *accountCount)
     return accountList;
 }
 
+// Helper function to find the number of account inside an array
 struct BankAccount* findAccount(struct BankAccount *accounts, int counter, int accountNumber) {
     for (int i = 0; i < counter; i++) {
         if (accounts[i].accountNumber == accountNumber) {
@@ -300,6 +304,7 @@ void test_findAccount() {
     assert(acc == NULL);
 }
 
+// Helper function to save the data into the CSV file
 void saveAccountsToCSV(const char *filename, struct BankAccount *accounts, int accountCount) {
     FILE *file = fopen(filename, "w");
     if (!file) {
