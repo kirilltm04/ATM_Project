@@ -24,7 +24,7 @@ int getValidInt();
 double getValidDouble();
 
 
-// Define struct BankAccount before using it anywhere
+// Structure representing a bank account
 struct BankAccount {
     int accountNumber;
     char accountHolder[50];
@@ -33,7 +33,7 @@ struct BankAccount {
     bool blocked;
 };
 
-
+// Function to check the entered Pin
 bool checkPin(struct BankAccount *account, int enteredPin) {
     if (enteredPin == account->pinCode) {
         return true;
@@ -48,6 +48,7 @@ void test_checkPin() {
     assert(checkPin(&account, 0000) == 0);
 }
 
+// Get the blocked status
 bool checkBlocked(struct BankAccount *account) {
     return account->blocked;
 }
@@ -60,12 +61,13 @@ void test_checkBlocked() {
     assert(checkBlocked(&account) == 1);
 }
 
+// Withdraw and deposit functions return a transaction result string and update the balance
 const char* withdraw(struct BankAccount *account, double amount) {
     if (amount <= 0) {
         return "Invalid withdrawal amount!";
     }
     // Ensure the withdrawal amount is a multiple of 5.
-    if ((int)amount % 5 != 0) {
+    if ((int)amount % 10 != 0) {
         return "Amount must be a multiple of 5, 10 or 20!";
     }
     if (account->balance >= amount) {
@@ -89,7 +91,7 @@ void test_withdraw() {
     result = withdraw(&account, 7);
     assert(strcmp(result, "Amount must be a multiple of 5, 10 or 20!") == 0);
 
-    result = withdraw(&account, 42);
+    result = withdraw(&account, 45);
     assert(strcmp(result, "Amount must be a multiple of 5, 10 or 20!") == 0);
 
     // Attempting to withdraw more than the balance.
@@ -112,7 +114,7 @@ void test_withdraw() {
     result = withdraw(&account, 20);
     // Check that the message indicates success.
     assert(strstr(result, "Insufficient funds!") != 0);
-    // Verify that the account balance has been updated.
+    // Verify that the account balance has not been updated.
     assert(account.balance == 0.0);
 }
 
@@ -129,7 +131,6 @@ const char* deposit(struct BankAccount *account, double amount) {
 // Test deposit function
 void test_deposit() {
     struct BankAccount account = {123, "Test User", 100.0, 1234, false};
-
     // Negative deposit should fail.
     const char* result = deposit(&account, -10);
     assert(strcmp(result, "Invalid deposit amount!") == 0);
@@ -471,4 +472,3 @@ int main() {
         }
     }
 }
-
