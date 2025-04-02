@@ -67,7 +67,7 @@ const char* withdraw(struct BankAccount *account, double amount) {
         return "Invalid withdrawal amount!";
     }
     // Ensure the withdrawal amount is a multiple of 5.
-    if ((int)amount % 10 != 0) {
+    if ((int)amount % 5 != 0) {
         return "Amount must be a multiple of 5, 10 or 20!";
     }
     if (account->balance >= amount) {
@@ -91,7 +91,7 @@ void test_withdraw() {
     result = withdraw(&account, 7);
     assert(strcmp(result, "Amount must be a multiple of 5, 10 or 20!") == 0);
 
-    result = withdraw(&account, 45);
+    result = withdraw(&account, 42);
     assert(strcmp(result, "Amount must be a multiple of 5, 10 or 20!") == 0);
 
     // Attempting to withdraw more than the balance.
