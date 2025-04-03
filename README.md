@@ -78,7 +78,7 @@ Click the video below to see the **ATM Simulator in action**:
 
 ## Testing
 
-Both unit and integration testing are integrated to ensure the functionality of all core features. Run the unit tests provided in `test.c` to verify that each ATM function behaves as expected.
+Unit testing is integrated to ensure the functionality of all core features. Run the unit tests provided in `unittest.c` to verify that each ATM function behaves as expected.
 
 ## License
 
