@@ -18,3 +18,5 @@
 1	158	1743582560229751158	build.ninja	d72e73c8e3a3ae02
 2	108	1743586355823179103	CMakeFiles/Programming_Assignment.dir/main.c.o	fa7e3e2755b37d85
 108	197	1743586355914295708	Programming_Assignment	f2fe80b9fad3c0fa
+9	1190	1743639242206699339	CMakeFiles/Programming_Assignment_Gui.dir/gui.c.o	d5715f4a70d4d27b
+1191	1312	1743639242339496375	Programming_Assignment_Gui	52f3e7f14500d2e3

@@ -36,7 +36,7 @@ struct BankAccount {
 // Function to check the entered Pin
 bool checkPin(struct BankAccount *account, int enteredPin) {
     if (enteredPin == account->pinCode) {
-        return true;
+        return true; // PIN is correct
     }
     return false;
 }
@@ -72,7 +72,7 @@ const char* withdraw(struct BankAccount *account, double amount) {
     }
     if (account->balance >= amount) {
         account->balance -= amount;
-        static char msg[100];
+        static char msg[100]; // Static so it persists after function exits
         snprintf(msg, 100, "Withdrawal successful! New balance: £%.2f", account->balance);
         return msg;
     }
@@ -123,7 +123,7 @@ const char* deposit(struct BankAccount *account, double amount) {
         return "Invalid deposit amount!";
     }
     account->balance += amount;
-    static char msg[100];
+    static char msg[100]; // Static so it persists after function exits
     snprintf(msg, sizeof(msg), "Deposit successful! New balance: £%.2f", account->balance);
     return msg;
 }
@@ -196,7 +196,7 @@ void test_showBalance() {
 // Logging function that appends the transaction details to "log.txt"
 void logTransaction(int accountNumber, const char *transactionType, double originalBalance, double newBalance) {
     FILE *logFile = fopen("log.txt", "a");
-    if (logFile != NULL) {
+    if (logFile != NULL) { // Log format: AccountNumber,TransactionType,Amount,NewBalance
         fprintf(logFile, "Account %d - %s: Original Balance = £%.2f, New Balance = £%.2f\n",
                 accountNumber, transactionType, originalBalance, newBalance);
         fclose(logFile);
@@ -220,9 +220,9 @@ void displayReceipt(const char *accountHolder, const char *transactionType, doub
         // Validate the input
         if (choice == 'y' || choice == 'Y' || choice == 'n' || choice == 'N') {
             break;  // Exit loop if valid input
-        } else {
+        } else { // Keep asking until the user provides a valid 'y' or 'n' input
             // Clear invalid input
-            while (getchar() != '\n');  // Clear the buffer of any extra characters
+            while (getchar() != '\n');  // Clear the buffer of any extra characters to avoid infinite loop
             printf("Invalid input! Please enter 'y' for yes or 'n' for no.\n");
         }
     }
@@ -246,7 +246,7 @@ void displayReceipt(const char *accountHolder, const char *transactionType, doub
 // This function reads the CSV file and fills a static array of BankAccount.
 // It returns a pointer to that array and sets *accountCount to the number of accounts read.
 struct BankAccount* loadAccountsFromCSV(const char *filename, int *accountCount) {
-    int numberOfAccounts = 2;
+    int numberOfAccounts = 2; // Currently set to read only 2 accounts. Modify for scalability.
     struct BankAccount *accountList = malloc(numberOfAccounts * sizeof(struct BankAccount));
     FILE *file = fopen(filename, "r");
     if (!file) {
@@ -263,7 +263,7 @@ struct BankAccount* loadAccountsFromCSV(const char *filename, int *accountCount)
     }
     *accountCount = 0;
     while (fgets(line, sizeof(line), file) != NULL && *accountCount < numberOfAccounts) {
-        int accNum, pin, blockedInt;
+        int accNum, pin, blockedInt; // assign the structure variables
         double balance;
         char name[50];
         // Parse the CSV line.
@@ -284,7 +284,7 @@ struct BankAccount* loadAccountsFromCSV(const char *filename, int *accountCount)
 struct BankAccount* findAccount(struct BankAccount *accounts, int counter, int accountNumber) {
     for (int i = 0; i < counter; i++) {
         if (accounts[i].accountNumber == accountNumber) {
-            return &accounts[i];
+            return &accounts[i]; // The account was found
         }
     }
     return NULL;
@@ -330,8 +330,8 @@ int getValidInt() {
     int num;
     char ch;
     while (scanf("%d", &num) != 1) {
-        while ((ch = getchar()) != '\n' && ch != EOF);  // Clear buffer
-        printf("Invalid input. Please try again:\n>>> ");
+        while ((ch = getchar()) != '\n' && ch != EOF);  // Clear input buffer to avoid infinite loop
+        printf("Invalid input. Please try again:\n>>> "); // Keep prompting the user until a valid integer is entered
     }
     return num;
 }
@@ -341,8 +341,8 @@ double getValidDouble() {
     double num;
     char ch;
     while (scanf("%lf", &num) != 1) {
-        while ((ch = getchar()) != '\n' && ch != EOF);
-        printf("Invalid input. Please try again:\n>>> ");
+        while ((ch = getchar()) != '\n' && ch != EOF); // Clear input buffer to avoid infinite loop
+        printf("Invalid input. Please try again:\n>>> "); // Keep prompting the user until a valid double is entered
     }
     return num;
 }
